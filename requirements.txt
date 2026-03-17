@@ -1,0 +1,34 @@
+# Core Dependencies
+streamlit>=1.28.0
+opencv-python>=4.8.0
+numpy>=1.24.0
+Pillow>=10.0.0
+
+# Speech Processing
+openai-whisper>=20231117
+coqui-tts>=0.21.0
+pyaudio>=0.2.13
+
+# AI Models
+google-generativeai>=0.3.0
+groq>=0.4.0
+transformers>=4.35.0
+torch>=2.0.0
+ultralytics>=8.0.0  # YOLOv8
+
+# Memory & Orchestration
+langchain>=0.1.0
+langchain-community>=0.0.10
+
+# Web Search
+duckduckgo-search>=3.9.0
+
+# Wake Word Detection
+pvporcupine>=3.0.0
+
+# Environment Variables
+python-dotenv>=1.0.0
+
+# Utilities
+requests>=2.31.0
+aiohttp>=3.9.0
