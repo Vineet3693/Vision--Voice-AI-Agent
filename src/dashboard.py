@@ -133,7 +133,7 @@ def main():
                     
                     if ret:
                         frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-                        camera_placeholder.image(frame_rgb, use_column_width=True)
+                        camera_placeholder.image(frame_rgb, use_container_width=True)
                         
                         # Sample detection overlay (would be dynamic in real app)
                         st.info("🔍 Real-time object detection active")
@@ -143,7 +143,7 @@ def main():
                     st.error("❌ Could not access camera")
                     camera_placeholder.image(
                         np.zeros((480, 640, 3), dtype=np.uint8),
-                        use_column_width=True
+                        use_container_width=True
                     )
                     
             except Exception as e:

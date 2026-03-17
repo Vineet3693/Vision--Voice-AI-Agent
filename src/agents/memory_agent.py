@@ -1,11 +1,28 @@
 """
 Memory Agent - Conversation and object memory using LangChain
 """
-from langchain.memory import ConversationBufferMemory
 from collections import deque
 import json
 from datetime import datetime
 from src.config.settings import Config
+
+
+class ConversationBufferMemory:
+    """Conversation memory buffer for storing interaction history"""
+    def __init__(self, return_messages=True, max_token_limit=1000):
+        self.return_messages = return_messages
+        self.max_token_limit = max_token_limit
+        self.messages = []
+        self.buffer = ""
+    
+    def save_context(self, inputs, outputs):
+        """Save context from this conversation"""
+        self.messages.append({"input": inputs, "output": outputs})
+        self.buffer += f"\nInput: {inputs}\nOutput: {outputs}"
+    
+    def load_memory_variables(self, inputs):
+        """Load memory variables"""
+        return {"history": self.buffer}
 
 class MemoryAgent:
     """Handles all memory-related tasks"""
@@ -80,6 +97,7 @@ class MemoryAgent:
                 return True
         return False
     
+    
     def get_conversation_history(self):
         """
         Get full conversation history
@@ -87,14 +105,15 @@ class MemoryAgent:
         Returns:
             str: Formatted conversation history
         """
-        messages = self.conversation_memory.chat_memory.messages
+        messages = self.conversation_memory.messages
         history = []
         
         for msg in messages:
-            role = "User" if msg.type == "human" else "AI"
-            history.append(f"{role}: {msg.content}")
+            history.append(f"User: {msg.get('input', {}).get('input', 'N/A')}")
+            history.append(f"AI: {msg.get('output', {}).get('output', 'N/A')}")
         
         return "\n".join(history)
+
     
     def get_context_for_query(self, query):
         """

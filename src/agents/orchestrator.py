@@ -25,7 +25,8 @@ class MasterOrchestrator:
         self.web_agent = web_agent
         
         self.client = Groq(api_key=Config.GROQ_API_KEY)
-        self.model = "llama3-8b-8192"
+        # Use mixtral-8x7b-32768 instead of deprecated llama3-8b-8192
+        self.model = "mixtral-8x7b-32768"
         
     def detect_intent(self, user_input, has_visual_context=False):
         """
